@@ -57,6 +57,7 @@ const (
 	SOUND_MULAW                 = 8
 	SOUND_AAC                   = 10
 	SOUND_SPEEX                 = 11
+	SOUND_OPUS                  = 13 //for internal use
 
 	SOUND_5_5Khz = 0
 	SOUND_11Khz  = 1
@@ -102,6 +103,7 @@ type Tag struct {
 		9 = reserved
 		10 = AAC
 		11 = Speex
+		13 = Opus
 		14 = MP3 8-Khz
 		15 = Device-specific sound
 		Formats 7, 8, 14, and 15 are reserved for internal use
@@ -234,6 +236,8 @@ func (t *Tag) parseAudioHeader(b []byte) (n int, err error) {
 		if t.AACPacketType, err = pio.ReadU8(b, &n); err != nil {
 			return
 		}
+	case SOUND_OPUS:
+		return
 	}
 
 	return

@@ -2,6 +2,7 @@ package av
 
 import (
 	"fmt"
+	"github.com/notedit/rtmp/codec/opus"
 	"time"
 
 	"github.com/notedit/rtmp/codec/aac"
@@ -11,6 +12,7 @@ import (
 const (
 	H264 = 1 + iota
 	AAC
+	OPUS
 	H264DecoderConfig
 	H264SPSPPSNALU
 	AACDecoderConfig
@@ -20,6 +22,7 @@ const (
 var PacketTypeString = map[int]string{
 	H264:              "H264",
 	AAC:               "AAC",
+	OPUS:              "OPUS",
 	H264DecoderConfig: "H264DecoderConfig",
 	H264SPSPPSNALU:    "H264SPSPPSNALU",
 	AACDecoderConfig:  "AACDecoderConfig",
@@ -35,6 +38,7 @@ type Packet struct {
 	ASeqHdr    []byte
 	VSeqHdr    []byte
 	Metadata   []byte
+	OPUS       *opus.Codec
 	AAC        *aac.Codec
 	H264       *h264.Codec
 }

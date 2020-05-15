@@ -1,6 +1,7 @@
 package flv
 
 import (
+	"github.com/notedit/rtmp/codec/opus"
 	"io"
 	"io/ioutil"
 
@@ -107,11 +108,34 @@ func AACTagFromCodec(aac *aac.Codec) flvio.Tag {
 	return tag
 }
 
+func OPUSTagFromCodec(codec *opus.Codec) flvio.Tag {
+	tag := flvio.Tag{
+		Type:        flvio.TAG_AUDIO,
+		SoundFormat: flvio.SOUND_OPUS,
+		SoundRate:   flvio.SOUND_44Khz, // we use 44Khz as format, but it is 48khz
+		SoundSize:   flvio.SOUND_16BIT,
+	}
+	ch := codec.Channels
+	switch ch {
+	case 1:
+		tag.SoundType = flvio.SOUND_MONO
+	default:
+		tag.SoundType = flvio.SOUND_STEREO
+	}
+	return tag
+}
+
 func WritePacket(pkt av.Packet, writeTag func(flvio.Tag) error, publishing bool) (err error) {
 	switch pkt.Type {
 	case av.AAC:
 		tag := AACTagFromCodec(pkt.AAC)
 		tag.AACPacketType = flvio.AAC_RAW
+		tag.Time = uint32(flvio.TimeToTs(pkt.Time))
+		tag.Data = pkt.Data
+		return writeTag(tag)
+
+	case av.OPUS:
+		tag := OPUSTagFromCodec(pkt.OPUS)
 		tag.Time = uint32(flvio.TimeToTs(pkt.Time))
 		tag.Data = pkt.Data
 		return writeTag(tag)
@@ -271,6 +295,13 @@ func ReadPacket(readTag func() (flvio.Tag, error)) (pkt av.Packet, err error) {
 
 		case flvio.TAG_AUDIO:
 			switch tag.SoundFormat {
+			case flvio.SOUND_OPUS:
+				pkt = av.Packet{
+					Type: av.OPUS,
+					Data: tag.Data,
+					Time: flvio.TsToTime(int64(tag.Time)),
+				}
+				return
 			case flvio.SOUND_AAC:
 				switch tag.AACPacketType {
 				case flvio.AAC_SEQHDR:
