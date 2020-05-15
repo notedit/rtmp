@@ -4,7 +4,7 @@ import (
 	"io"
 	"net/url"
 
-	"notedit/rtmp/format/flv/flvio"
+	"github.com/notedit/rtmp/format/flv/flvio"
 )
 
 type ReadWriteFlusher interface {

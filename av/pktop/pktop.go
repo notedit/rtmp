@@ -3,7 +3,7 @@ package pktop
 import (
 	"time"
 
-	"notedit/rtmp/av"
+	"github.com/notedit/rtmp/av"
 )
 
 type NativeRateLimiter struct {

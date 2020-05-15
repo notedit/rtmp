@@ -7,8 +7,8 @@ import (
 	"math"
 	"sort"
 
-	"notedit/rtmp/utils/bits"
-	"notedit/rtmp/utils/bits/pio"
+	"github.com/notedit/rtmp/utils/bits"
+	"github.com/notedit/rtmp/utils/bits/pio"
 )
 
 const (

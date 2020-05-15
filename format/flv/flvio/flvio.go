@@ -6,7 +6,7 @@ import (
 	"io"
 	"time"
 
-	"notedit/rtmp/utils/bits/pio"
+	"github.com/notedit/rtmp/utils/bits/pio"
 )
 
 func TsToTime(ts int64) time.Duration {

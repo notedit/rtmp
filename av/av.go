@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"notedit/rtmp/codec/aac"
-	"notedit/rtmp/codec/h264"
+	"github.com/notedit/rtmp/codec/aac"
+	"github.com/notedit/rtmp/codec/h264"
 )
 
 const (

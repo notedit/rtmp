@@ -12,10 +12,10 @@ import (
 	"strings"
 	"time"
 
-	"notedit/rtmp/format/flv"
+	"github.com/notedit/rtmp/format/flv"
 
-	"notedit/rtmp/av"
-	"notedit/rtmp/format/rtmp"
+	"github.com/notedit/rtmp/av"
+	"github.com/notedit/rtmp/format/rtmp"
 )
 
 type dummyCloser struct{}

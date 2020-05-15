@@ -5,8 +5,8 @@ import (
 	"io"
 	"io/ioutil"
 
-	"notedit/rtmp/format/flv/flvio"
-	"notedit/rtmp/utils/bits/pio"
+	"github.com/notedit/rtmp/format/flv/flvio"
+	"github.com/notedit/rtmp/utils/bits/pio"
 )
 
 type message struct {

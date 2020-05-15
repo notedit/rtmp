@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"notedit/rtmp/utils/bits/pio"
+	"github.com/notedit/rtmp/utils/bits/pio"
 )
 
 type AMFParseError struct {
