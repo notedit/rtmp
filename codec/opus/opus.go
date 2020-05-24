@@ -1,7 +1,10 @@
 package opus
 
 type Codec struct {
-	ConfigBytes []byte
-	SampleRate  int
-	Channels    int
+	SampleRate int
+	Channels   int
+}
+
+func NewCodec() *Codec {
+	return &Codec{}
 }
